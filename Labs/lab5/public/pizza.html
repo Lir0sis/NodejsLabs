@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Піца</title>
+</head>
+
+<body>
+    <h1>Замовлення піци:</h1>
+    <form>
+        <div>
+            <label for="CreateInput1">Назва:</label>
+            <select name="pizza_names" id="CreateInput1">
+                <option value="0">Маргарита</option>
+                <option value="1">Гавайська</option>
+                <option value="2">Капрічоза</option>
+                <option value="3">Сицилійська</option>
+            </select>
+            <label for="CreateInput2">Кіл-сть:</label>
+            <input type="number" min="1" id="CreateInput2">
+            <button type="button" id="CreateBtn">Замовити</button>
+            <div id="CreateOutput"></div>
+        </div>
+    </form>
+    <h1>Оновлення замовлення:</h1>
+    <form>
+        <div>
+            <label for="UpdateInput1">ID замовлення:</label>
+            <select name="ids" id="UpdateInput1"></select>
+            <label for="UpdateInput2">Назва:</label>
+            <select name="pizza_names" id="UpdateInput2">
+                <option value="0">Маргарита</option>
+                <option value="1">Гавайська</option>
+                <option value="2">Капрічоза</option>
+                <option value="3">Сицилійська</option>
+            </select>
+            <label for="UpdateInput3">Кіл-сть:</label>
+            <input type="number" min="1" id="UpdateInput3">
+            <label for="UpdateInput4">Дата:</label>
+            <input type="date" id="UpdateInput4">
+            <button type="button" id="UpdateBtn">Оновити замовлення</button>
+            <div id="UpdateOutput"></div>
+        </div>
+    </form>
+    <h1>Перевірка замовлення:</h1>
+    <form>
+        <div>
+            <label for="ReadInput">ID замовлення:</label>
+            <input type="number" min="0" id="ReadInput">
+            <button type="button" id="ReadBtn">Перевірити</button>
+            <div id="ReadOutput"></div>
+        </div>
+    </form>
+    <h1>Видалення замовлення:</h1>
+    <form>
+        <div>
+            <label for="DeleteInput">ID замовлення:</label>
+            <input type="number" min="0" id="DeleteInput">
+            <button type="button" id="DeleteBtn">Видалити</button>
+            <div id="DeleteOutput"></div>
+        </div>
+    </form>
+</body>
+<script>
+    window.onload = function () {
+        const InputC1 = document.getElementById("CreateInput1");
+        const InputC2 = document.getElementById("CreateInput2");
+        const BtnC = document.getElementById("CreateBtn");
+
+        const InputU1 = document.getElementById("UpdateInput1");
+        const InputU2 = document.getElementById("UpdateInput2");
+        const InputU3 = document.getElementById("UpdateInput3");
+        const InputU4 = document.getElementById("UpdateInput4");
+        const BtnU = document.getElementById("UpdateBtn");
+
+        const InputR = document.getElementById("ReadInput");
+        const BtnR = document.getElementById("ReadBtn");
+
+        const InputD = document.getElementById("DeleteInput");
+        const BtnD = document.getElementById("DeleteBtn");
+
+        function CreateOrder() {
+            const body = {
+                'name': + InputC1.value,
+                'quantity': + InputC2.value,
+                'timestamp': new Date(new Date().toDateString()).getTime()
+            }
+            const options = {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            fetch("http://localhost:8000/pizza", options).then(res => res.json()).then(data => {
+                alert(`Замовлення ${data.id} створено`);
+                updateDropDownIds()
+            });
+        }
+
+        function UpdateOrder() {
+            let id = InputU1.value
+            const body = {
+                'name': InputU2.value,
+                'quantity': InputU3.value,
+                'timestamp': new Date(InputU4.value).getTime()
+            }
+            const options = {
+                method: "PUT",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            fetch("http://localhost:8000/pizza/" + id, options).then(res => res.json()).then(data => {
+                alert(`Замовлення ${data.id} оновлено`);
+            });
+        }
+
+        function ReadOrder() {
+            getByID(parseInt(InputR.value)).then(data => {
+                if (data)
+                    alert(`Замовлення ${data.id}:\nтип піци: ${data.name}\nкіл-сть: ${data.quantity}\nдата: ${data.timestamp}\n`)
+                else
+                    alert("Помилка!")
+            })
+        }
+
+        function DeleteOrder() {
+            let id = InputD.value
+            fetch("http://localhost:8000/pizza/" + id, { method: "DELETE" }).then(res => res.json()).then(data => {
+                if (data) {
+                    alert(`Замовлення ${data.id} видалено`);
+                    updateDropDownIds()
+                }
+                else
+                    alert("Помилка!")
+            });
+        }
+
+        function UpdateOnChange() {
+            getByID(parseInt(InputU1.value)).then(data => {
+                InputU2.value = data.name
+                InputU3.value = data.quantity
+                InputU4.value = new Date(data.timestamp).toISOString().substring(0, 10)
+            })
+        }
+
+        async function getByID(id) {
+            return fetch("http://localhost:8000/pizza/" + id, { method: "GET" }).then(data => data.json())
+        }
+
+        function updateDropDownIds() {
+            fetch("http://localhost:8000/pizza_all", { method: "GET" }).then(res => res.json()).then(data => {
+                InputU1.innerHTML = ''
+                Array.prototype.forEach.call(data.ids, e => {
+                    InputU1.innerHTML += `<option value="${+e}">${+e}</option>\n`
+                });
+                UpdateOnChange()
+            });
+        }
+        updateDropDownIds()
+
+
+        BtnC.addEventListener("click", CreateOrder);
+        BtnU.addEventListener("click", UpdateOrder);
+        BtnR.addEventListener("click", ReadOrder);
+        BtnD.addEventListener("click", DeleteOrder);
+        InputU1.addEventListener("change", UpdateOnChange)
+        BtnC.addEventListener("click", updateDropDownIds);
+    }
+</script>
+
+</html>

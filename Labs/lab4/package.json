@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "lab4 for Nodejs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lir0sis",
+  "license": "ISC",
+  "dependencies": {
+    "@lir0sis/math": "0.0.1",
+    "lir0sis.math": "file:lir0sis.math"
+  }
+}

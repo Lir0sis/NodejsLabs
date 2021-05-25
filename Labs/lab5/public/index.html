@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+</head>
+
+<body>
+    <h1>Все пользователи:</h1>
+    <form>
+        <div>
+            <button type="button" id="getAllBtn">Вывести всех пользователей</button>
+            <div id="getAllOutput"></div>
+        </div>
+    </form>
+    <h1>Создать пользователя:</h1>
+    <form>
+        <div>
+            <label for="createUserInput">Пользователь:</label>
+            <input id="createUserInput">
+            <button type="button" id="createUserBtn">Создать пользователя</button>
+            <div id="createUserOutput"></div>
+        </div>
+    </form>
+</body>
+<script>
+    window.onload = function () {
+        const getAllBtn = document.getElementById("getAllBtn");
+        const getAllOutput = document.getElementById("getAllOutput");
+        function getAllUsers() {
+            fetch("/users").then(responce => responce.json()).then(data => {
+                getAllOutput.innerText = JSON.stringify(data);
+            });
+        }
+
+        getAllBtn.addEventListener("click", getAllUsers);
+
+        const createUserInput = document.getElementById("createUserInput");
+        const createUserOutput = document.getElementById("createUserOutput");
+        const createUserBtn = document.getElementById("createUserBtn");
+        function createUsers() {
+            const body = createUserInput.value;
+            const options = {
+                method: "POST",
+                body: body,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            fetch("http://localhost:8000/users", options).then(responce => responce.text()).then(data => {
+                createUserOutput.innerText = data;
+            });
+        }
+
+        createUserBtn.addEventListener("click", createUsers);
+    }
+</script>
+
+</html>

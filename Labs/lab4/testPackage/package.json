@@ -1,0 +1,14 @@
+{
+  "name": "lir0sis.test",
+  "version": "0.0.1",
+  "description": "test module for lab4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ignore"
+  ],
+  "author": "lir0sis",
+  "license": "ISC"
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Заголовок</title>
+</head>
+
+<body>
+    <h1>Заголовок тестового файла</h1>
+    <p>Некий текст</p>
+    <label for="inputField1">Введите значение:</label>
+    <input id="inputField1">
+    <button id="inputSubmit1">Ввести</button>
+    <div id="inputResponse1"></div>
+    <br />
+    <label for="inputField2">Введите масив чисел:</label>
+    <input id="inputField2">
+    <button id="inputSubmit2">Сумма</button>
+    <div id="inputResponse2"></div>
+    <br />
+    <button id="inputSubmit3">Показать Файлы</button>
+    <div id="inputResponse3"></div>
+</body>
+<script>
+    window.onload = function () {
+        const input1 = document.getElementById("inputField1");
+        const btn1 = document.getElementById("inputSubmit1");
+        const output1 = document.getElementById("inputResponse1");
+
+        const input2 = document.getElementById("inputField2");
+        const btn2 = document.getElementById("inputSubmit2");
+        const output2 = document.getElementById("inputResponse2");
+
+        const btn3 = document.getElementById("inputSubmit3");
+        const output3 = document.getElementById("inputResponse3");
+
+        const getValue1 = () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/users");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    output1.innerHTML = this.responseText;
+                }
+            }
+
+            xhr.onerror = () => {
+                console.log("Error");
+            }
+            xhr.send(input1.value);
+        };
+        const getValue2 = () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/task");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    output2.innerHTML = this.responseText;
+                }
+            }
+            xhr.onerror = () => {
+                console.log("Error");
+            }
+            xhr.send(input2.value);
+        };
+
+        const getValue3 = () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/files");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    output3.innerHTML = this.responseText;
+                }
+            }
+            xhr.onerror = () => {
+                console.log("Error");
+            }
+            xhr.send(input2.value);
+        };
+
+        btn3.addEventListener('click', getValue3);
+        btn1.addEventListener("click", getValue1);
+        btn2.addEventListener("click", getValue2);
+    };
+
+</script>
+
+</html>
