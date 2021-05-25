@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ДЗ №1</title>
+	</head>
+	<body>
+		<input type='text' id='fibonacci' oninput="fibbonachi()"> Fib:
+			<span id='f_result'></span>
+		</input>
+		<p/>
+		<input type='text' id='elevator1' oninput="elevator()"/>
+		<input type='text' id='elevator2' oninput="elevator()"> Dir:
+			<span id='e_result'></span>
+		</input>
+		<p/>
+		<input type='text' id='arr1' oninput="Rarray()"/>
+		<input type='text' id='arr2' oninput="Rarray()"> Arr:
+			<span id='arr_result'></span>
+		</input>
+		<p/>
+		<select name='groups' id='groupsList' onchange="Schedule()"></select>
+		<input type='date' id='s_date' oninput="Schedule()">
+			<div id='s_result'></div>
+		</input>
+		<p/>
+		<input type='text' id='item1' />
+		<input type='text' id='item2' />
+		<input type='text' id='item3' />
+		<input type='button' id='b1' value='Add' onclick="TableAdd()"/>
+		<input type='button' id='b2' value='Update' onclick="TableUpdate()"/>
+
+		<table id='i_result'></table>
+		<table>
+			<tr><td><input type='text' id='val_a' /></td><td><input type='text' id='val_b' /></td><td id='c_result'></td></tr>
+			<tr><td><input type='button' value='+' onclick="C_SetVal(C_Add)" /></td><td><input type='button' value='-' onclick="C_SetVal(C_Subtract)" /></td></tr>
+			<tr><td><input type='button' value='x' onclick="C_SetVal(C_Mul)" /></td><td><input type='button' value='/' onclick="C_SetVal(C_Div)" /></td></tr>
+		</table>
+		<input type='date' id='weather1' oninput="Weather()"/>
+		<input type='date' id='weather2' oninput="Weather()"/>
+		<span id="w_result"></span>
+		<!--<span id='i_result'></span>-->
+
+		<script src="script.js"></script>
+	</body>
+</html>

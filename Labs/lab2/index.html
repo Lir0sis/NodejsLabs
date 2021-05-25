@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компьютерный практикум №2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        const loadScript = (url) => (
+            new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = url;
+            
+                script.onload = () => resolve(script);
+                script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`)	);
+            
+                document.head.append(script);
+            })
+        );
+        async function Load() {
+            try {
+                await loadScript("./js/scriptProduct.js");
+                await loadScript("./js/scriptBasket.js");
+                await loadScript("./js/scriptConst.js");
+                await loadScript("./js/scriptMain.js");
+                InitDocument();
+            } catch(err) {
+                alert(err);
+            }
+        }     
+
+    </script>
+</head>
+<body onload="Load()">
+    <div class="wrapper">
+        <div class="header">
+            <div class="menu-wrap">
+                <img src="img/logo.png" class="menu-logo">
+                <input type="checkbox" id="menu-checkbox">
+                <nav>
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">Корзина</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </nav>
+                <label for="menu-checkbox">
+                   <i class="fa fa-bars menu-icon"></i>
+                </label>
+            </div>
+
+            <div class="custom">
+                <img src="img/1.png" class="custom-Background">
+                <img src="img/2.png" class="custom-logo">
+                <div class="custom-text"><h1>Магазин музыкальных инструментов</h1></div>
+            </div>
+        </div>
+
+        <div class="main" id="mainD">
+           <div class="aside">
+                <select onchange="SetQuantity(this)">
+                    <option selected value="8">8 на странице</option>
+                    <option value="16">16 на странице</option>
+                    <option value="24">24 на странице</option>
+                    <option value="32">32 на странице</option>
+                </select>
+                <select onchange="SetSort(this)">
+                    <option selected value="0">Сортировать по имени А-Я</option>
+                    <option value="1">Сортировать по имени Я-А</option>
+                    <option value="2">Сортировать по возрастанию цены</option>
+                    <option value="3">Сортировать по убыванию цены</option>
+                </select>
+                <div class='priceRange' style="text-align: center">
+                    <p>Мін. Ціна</p><input id='price1' onchange='PriceRange()' type='text'>
+                    <p>Макс. Ціна</p><input id='price2' onchange='PriceRange()' type='text'>
+                </div>
+                <button class="mybtn1" onclick=ResetFilters()>Сбросить фильтры</button>
+                <p id="basketInformation">В корзине: 0 товаров</p>
+                <h2>Фильтры:</h2>
+                <div class="grouping"></div>
+            </div>
+
+            <div class="content">
+                <div class="pagination">
+                    <a href="#" class="pagination-main">&laquo;</a>
+                    <a href="#" class="pagination-main">&raquo;</a>
+                </div>
+            </div>
+        </div> 
+
+        <div class="main" id="basketD" style="display: none;">
+            <div class="aside"></div>
+            <div class="content"  style="display:block;">
+                <div id="basketTable">
+                    <h1>Корзина пуста.</h1>
+                </div>
+            </div>
+        </div>  
+        <div class="footer">
+            <p>Тестовий сайт 2021 год</p>
+        </div> 
+    </div>
+</body>
+<script>
+
+</script>
+</html>

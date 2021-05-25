@@ -1,0 +1,434 @@
+/*основное*/
+
+* { 
+    margin: 0;
+    padding: 0;
+   font-family: sans-serif;
+    box-sizing: border-box;
+   word-break: break-word;
+}
+
+html, body {
+   height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+   min-width: 400px;
+    margin: 0 auto;
+}
+
+/*Меню*/
+
+.header {
+   background: #22292F;
+}
+
+.menu-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+.menu-logo {
+    height: 50px;
+}
+
+#menu-checkbox {
+    display: none;
+}
+
+#menu-checkbox:checked ~ nav ul {
+   max-height: 170px;
+    padding: 15px 0;
+    transition: all 0.5s;
+}
+
+nav {
+   position: relative;
+   width: 100%;
+   padding: 0 15px;
+}
+
+nav ul {
+   list-style-type: none;
+   max-height: 0px;
+   overflow: hidden;
+   transition: all 0.5s;
+   font-size: 1.4em;
+}
+
+nav ul li {
+   padding: 0 5px;
+}
+
+nav ul li a {
+   display: inline-block;
+   padding: 10px;
+   color: #dae1e7;
+   font-weight: bold;
+   -webkit-text-stroke: .02em #9d9b00;
+   text-decoration: none;
+   letter-spacing: 0.05em;
+}
+
+nav ul li a:hover, nav ul li a:focus {
+    color: #eb6f4a; 
+}
+
+.menu-icon {
+   padding: 0 15px;
+   line-height: 50px;
+    font-size: 2.4em;
+    color: #fff;
+}
+
+/*Заголовок*/
+
+.custom {
+   display: flex;
+   height: 70px;
+}
+
+.custom-Background {
+   width: 100%;
+   object-fit: cover;
+}
+
+.custom-logo {
+    position: absolute;
+   max-height: 70px;
+}
+
+.custom-text {
+   position: absolute;
+   margin-left: 103px;
+   width: calc(100% - 103px);
+   min-width: 297px;
+   align-self: center;
+   text-align: center;
+}
+
+/*Основной контент*/
+
+.main {
+   display: flex;
+   flex: 1 0 auto;
+   flex-wrap: wrap;
+   background: #f0f0f0;
+}
+
+.aside {
+   background: #84d0dd;
+   flex-basis: 100%;
+}
+
+.content {
+   display: flex;
+   flex-wrap: wrap;
+   flex-basis: 100%;
+   align-items: flex-start;
+}
+
+.card {
+   margin: 10px;
+   border-radius: 5px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
+select {
+   margin: 10px;
+   padding: 10px;
+   width: calc(100% - 20px);
+   font-size: 18px;
+   white-space: nowrap;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   outline: none;
+}
+
+.mybtn1 {
+   margin: 10px;
+   padding: 10px;
+   width: calc(100% - 20px);
+   font-size: 18px;
+   white-space: normal;
+   background: #22292F;
+   color: #dae1e7;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   outline: none;
+}
+
+.mybtn1:active  {
+   box-shadow: inset 0 0 25px #22292F;
+   background: #c2e3ff;
+   color: #22292F;
+}
+
+.mybtn2 {
+   padding: 10px 20px;
+   margin: 0 5px;
+   font-size: 18px;
+   white-space: normal;
+   background: #22292F;
+   color: #dae1e7;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   outline: none;
+}
+
+.mybtn2:active  {
+   box-shadow: inset 0 0 25px #22292F;
+   background: #c2e3ff;
+   color: #22292F;
+}
+
+.card-image {
+   position: relative;
+   padding-bottom: 100%;
+   overflow: hidden;
+}
+
+.image {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   max-width: 100%;
+   max-height: 100%;
+   margin: auto;
+   transition: transform .4s ease-out;
+}
+
+.card-head {
+   padding: 0 10px;
+   height: 2.4em;
+   display: table-cell;
+   vertical-align: middle;
+}
+
+.card-price {
+   position: absolute;
+   color: grey;
+   font-size: 22px;
+   text-align: left;
+}
+
+.card-presence {
+   font-size: 22px;
+   text-align: right;
+}
+
+.well {
+   color: green;
+}
+
+.badly {
+   color: rgb(48, 65, 64);
+}
+
+.card-text {
+   position: relative;
+   height: 8em;
+   padding: 10px;
+    overflow: hidden;
+   text-align: left;
+}
+
+.card-text:after {
+   content: "";
+   text-align: right;
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   width: 70%;
+   height: 1.2em;
+   background: linear-gradient(to right, rgba(255, 255, 255, 0), white 100%);
+   pointer-events: none;
+}
+
+.pagination {
+   height: 46px;
+   margin: 15px;
+   display: flex;
+   justify-content: center;
+   flex-basis: 100%;
+   text-align: center;
+}
+
+.pagination a {
+   margin: 5px;
+   padding: 8px 16px;
+   border: 1px solid #22292F;
+   color: #22292F;
+   text-decoration: none;
+   transition: background-color .3s;
+}
+
+.pagination a:hover:not(.active) {
+   background-color: #2bafe6;
+}
+
+.grouping {
+   margin: 0px 10px 10px 10px;
+}
+
+.groupingCheckbox {
+   text-align: left;
+   
+}
+.groupingCheckbox input {
+   width: 17px;
+   height: 17px;
+}
+
+.groupingCheckbox label {
+   word-break: break-all;
+   font-size: 18px;
+}
+
+.groupingCheckBox1 {
+   text-align: left;
+}
+.groupingCheckbox1 label {
+   word-break: break-all;
+   font-size: 10px;
+   
+}
+.groupingCheckbox1 input {
+   width: 17px;
+   height: 17px;
+}
+.myTable {
+   margin: auto;
+   width: 80%;
+   font-size: 1.5em;
+}
+
+.myTable caption {
+   font-size: 1.5em;
+}
+
+.myTable th {
+   font-weight: normal;
+}
+
+.myTable tr {
+   text-align: left;
+}
+
+.myTable tfoot td {
+   border-top: 1px solid #000;
+}
+
+/*Футер и прочее*/
+
+.footer { 
+   flex: 0 0 auto;
+    background: #7d95a7;
+}
+
+p {
+   padding: 10px;
+    font-size: 1.2em;
+    text-align: center;
+   line-height: 1.6;
+    color: #3D4852;
+}
+
+h1 {
+   padding: 10px;
+   text-align: center;
+}
+
+h2 {
+   padding: 10px;
+   text-align: center;
+   color: #337691;
+}
+
+/*медиазапросы*/
+
+@media (min-width: 576px) { 
+    .menu-icon {
+        display: none;
+    }
+   
+    nav ul {
+        max-height: 56px;
+        
+        text-align: right;
+    }
+   
+    nav ul li {
+        display: inline-flex;
+        padding-left: 15px;
+    }
+   
+   .aside {
+      flex-basis: 200px;
+   }
+   
+   .content {
+      flex: 1;
+   }
+   
+   .card {
+      margin: 2%;
+      width: 98%;
+   }
+}
+
+@media (min-width: 768px) { 
+   nav ul li {
+        padding-left: 25px;
+    }
+   
+   .aside {
+      flex-basis: 220px;
+   }
+   
+   .card {
+      margin: 1%;
+      width: 48%;
+   }
+}
+
+@media (min-width: 992px) {
+   .aside {
+      flex-basis: 240px;
+   }
+
+   .card {
+      margin: 0.666%;
+      width: 32%;
+   }
+}
+
+@media (min-width: 100px) {
+   .priceRange {
+      flex-basis: 120px;
+   }
+}
+
+@media (min-width: 1400px) { 
+   .wrapper{
+      width: 1400px;
+   }
+   
+   .custom-text {
+      width: 1267px;
+   }
+   
+   .card {
+      margin: 0.5%;
+      width: 24%;
+   }
+}
